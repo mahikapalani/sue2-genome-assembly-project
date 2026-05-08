@@ -1,0 +1,22 @@
+import matplotlib.pyplot as plt
+
+# Data from assemblies
+k = [21, 31, 51]
+contigs = [38, 29, 19]
+n50 = [27773, 42276, 42296]
+
+# Graph 1: Contigs
+plt.figure()
+plt.plot(k, contigs, marker='o')
+plt.xlabel("k-mer Size")
+plt.ylabel("Number of Contigs")
+plt.title("Effect of k-mer Size on Contig Count")
+plt.savefig("kmer_vs_contigs.png")
+
+# Graph 2: N50
+plt.figure()
+plt.plot(k, n50, marker='o')
+plt.xlabel("k-mer Size")
+plt.ylabel("N50")
+plt.title("Effect of k-mer Size on N50")
+plt.savefig("kmer_vs_n50.png")

@@ -1,0 +1,35 @@
+# Create environment
+conda create -n assembly_env -y
+
+# Activate environment
+conda activate assembly_env
+
+# Install MEGAHIT
+conda install -c bioconda -c conda-forge megahit -y
+
+# Install SRA tools
+conda install -c bioconda sra-tools -y
+
+# Download dataset
+prefetch SRR29518805
+
+# Convert SRA to FASTQ
+fasterq-dump SRR29518805
+
+# Run assembly for k = 21
+megahit -r SRR29518805.fastq -o output_k21 --k-list 21 -t 2 -m 0.3
+
+# Extract metrics
+grep "contigs" output_k21/log
+
+# Run assembly for k = 31
+megahit -r SRR29518805.fastq -o output_k31 --k-list 31 -t 1 -m 0.1
+
+# Extract metrics
+grep "contigs" output_k31/log
+
+# Run assembly for k = 51
+megahit -r SRR29518805.fastq -o output_k51 --k-list 51 -t 1 -m 0.1
+
+# Extract metrics
+grep "contigs" output_k51/log
